@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :rating do
-    title { "MyString" }
-    description { "MyText" }
-    rate { 1 }
-    users { "" }
-    order_items { "" }
+    sequence :title       { |n| "Title #{n}" }
+    sequence :description { "My text #{n}" }
+    rate                  { 3 }
+    users
+    order_items
   end
 end

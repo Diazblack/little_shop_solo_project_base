@@ -4,8 +4,9 @@ class CreateRatings < ActiveRecord::Migration[5.1]
       t.string :title
       t.text :description
       t.integer :rate
-      t.reference :users
-      t.reference :order_items
+      t.references :user, foreign_key: true
+      t.references :order_item, foreign_key: true
+      t.boolean :active, default: true
 
       t.timestamps
     end

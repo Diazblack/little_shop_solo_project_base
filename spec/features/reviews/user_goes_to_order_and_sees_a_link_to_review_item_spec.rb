@@ -35,7 +35,7 @@ describe 'items review' do
 
       click_on "Review Item #{@item_2.name}"
 
-      expect(current_path).to eq(new_review_path(@order_item_3))
+      expect(current_path).to eq(new_rating_path(@order_item_3))
 
     end
     it 'if order is cancel user shouldnt see a link in completed orders' do
@@ -45,6 +45,27 @@ describe 'items review' do
 
       expect(page).to_not have_link("Review Item #{@item_3.name}")
       expect(page).to_not have_link("Review Item #{@item_4.name}")
+
+    end
+
+    it 'user can go to the ratings form page and create a review' do
+      visit order_path(@order_2)
+
+      click_on "Review Item #{@item_2.name}"
+
+      title_1 = "Broken in two days"
+      description_1 = "Super Cheap quality"
+
+      fill_in :rating_title, with: title
+      fill_in :rating_description, with: description
+      fill_in :rating_rate, with: 1
+
+      click_on "Create Rating"
+
+      expect(current_path).to eq(order_path(@order_2))
+
+      expect(Rating.last.title).to eq(title_1)
+      expect(Rating.last.description).to eq(description_1)
 
     end
 

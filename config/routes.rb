@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   end
 
   scope :order_items, only: [:update] do
-    resources :reviews, only: [:new]
+    resources :ratings, only: [:new, :create]
   end
 
   resources :items, only: [:index, :show]

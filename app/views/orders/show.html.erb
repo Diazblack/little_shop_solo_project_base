@@ -38,7 +38,7 @@ Updated <%= distance_of_time_in_words(@order.created_at, Time.now) %> ago
     <td><%= number_to_currency(o_item.subtotal) %></td>
     <td>
       <% if @order.status != "cancelled" %>
-        <%= link_to "Review Item #{o_item.item.name}", new_review_path(o_item) %>
+        <%= link_to "Review Item #{o_item.item.name}", new_rating_path %>
       <% end %>
     </td>
     <td>

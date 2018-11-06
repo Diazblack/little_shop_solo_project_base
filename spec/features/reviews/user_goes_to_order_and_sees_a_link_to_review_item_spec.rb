@@ -66,10 +66,28 @@ describe 'items review' do
 
       expect(current_path).to eq(order_path(@order_2))
 
+      expect(page).to have_content("Review Was Created")
+
       expect(Rating.last.title).to eq(title_1)
       expect(Rating.last.description).to eq(description_1)
 
     end
 
+    it 'user can go to the ratings form page and create a review' do
+      visit order_path(@order_2)
+
+      click_on "Review Item #{@item_2.name}"
+
+      expect(current_path).to eq(new_order_item_rating_path(@order_item_3))
+
+      fill_in :rating_title, with: " "
+      fill_in :rating_description, with: " "
+      fill_in :rating_rate, with: " "
+
+      click_on "Create Rating"
+
+      expect(page).to have_content("Incomplete Fields")
+
+    end
   end
 end

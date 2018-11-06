@@ -14,6 +14,7 @@ class RatingsController < ApplicationController
       flash[:success] = "Review Was Created"
       redirect_to order_path(@order)
     else
+      flash.now[:notice] = "Incomplete Fields"
       render :new
     end
   end

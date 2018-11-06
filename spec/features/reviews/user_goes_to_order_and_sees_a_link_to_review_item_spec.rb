@@ -35,7 +35,7 @@ describe 'items review' do
 
       click_on "Review Item #{@item_2.name}"
 
-      expect(current_path).to eq(new_rating_path(@order_item_3))
+      expect(current_path).to eq(new_order_item_rating_path(@order_item_3))
 
     end
     it 'if order is cancel user shouldnt see a link in completed orders' do
@@ -53,11 +53,13 @@ describe 'items review' do
 
       click_on "Review Item #{@item_2.name}"
 
+      expect(current_path).to eq(new_order_item_rating_path(@order_item_3))
+
       title_1 = "Broken in two days"
       description_1 = "Super Cheap quality"
 
-      fill_in :rating_title, with: title
-      fill_in :rating_description, with: description
+      fill_in :rating_title, with: title_1
+      fill_in :rating_description, with: description_1
       fill_in :rating_rate, with: 1
 
       click_on "Create Rating"

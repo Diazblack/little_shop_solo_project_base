@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     patch ':order_item_id/fulfill', to: 'order_items#update', as: 'item_fulfill'
   end
 
-  scope :order_items, only: [:update] do
+  resources :order_items, only: [:update] do
     resources :ratings, only: [:new, :create]
   end
 

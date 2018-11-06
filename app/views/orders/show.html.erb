@@ -37,8 +37,15 @@ Updated <%= distance_of_time_in_words(@order.created_at, Time.now) %> ago
     <td><%= number_to_currency(o_item.price) %></td>
     <td><%= number_to_currency(o_item.subtotal) %></td>
     <td>
-      <% if @order.status != "cancelled" && o_item.ratings.count == 0  %>
-        <%= link_to "Review Item #{o_item.item.name}", new_order_item_rating_path(o_item) %>
+      <% if @order.status != "cancelled"  %>
+        <% if o_item.ratings.count == 0 %>
+          <%= link_to "Review Item #{o_item.item.name}", new_order_item_rating_path(o_item) %>
+        <% else %>
+          <li>Review</li>
+          <li><%= o_item.ratings.last.title %></li>
+          <li><%= o_item.ratings.last.description %></li>
+          <li>Rate:<%= o_item.ratings.last.rate %></li>
+        <% end %>
       <% end %>
     </td>
     <td>

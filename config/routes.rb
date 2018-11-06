@@ -24,10 +24,10 @@ Rails.application.routes.draw do
     patch ':order_item_id/fulfill', to: 'order_items#update', as: 'item_fulfill'
   end
 
-  namespace :order_items, only: [:update] do
-    resources :review, only: [:new]
+  scope :order_items, only: [:update] do
+    resources :reviews, only: [:new]
   end
-  
+
   resources :items, only: [:index, :show]
   resources :users, only: [:index, :new, :create, :edit, :show, :update] do
     resources :orders, only: [:index, :update]

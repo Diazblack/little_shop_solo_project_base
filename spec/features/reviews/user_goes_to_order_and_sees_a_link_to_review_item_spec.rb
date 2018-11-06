@@ -35,9 +35,18 @@ describe 'items review' do
 
       click_on "Review Item #{@item_2.name}"
 
-      expect(current_path).to eq(new_order_items_review_path(@order_item_3))
-    end
+      expect(current_path).to eq(new_review_path(@order_item_3))
 
+    end
+    it 'if order is cancel user shouldnt see a link in completed orders' do
+      visit profile_orders_path(@user)
+
+      click_on "Order #{@order_3.id}"
+
+      expect(page).to_not have_link("Review Item #{@item_3.name}")
+      expect(page).to_not have_link("Review Item #{@item_4.name}")
+
+    end
 
   end
 end

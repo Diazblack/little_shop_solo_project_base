@@ -26,6 +26,7 @@ Updated <%= distance_of_time_in_words(@order.created_at, Time.now) %> ago
     <th>Price</th>
     <th>Subtotal</th>
     <th></th>
+    <th></th>
   </tr>
   <% @order.order_items.each do |o_item| %>
   <% if @user == current_user || o_item.item.user == current_user %>
@@ -35,21 +36,22 @@ Updated <%= distance_of_time_in_words(@order.created_at, Time.now) %> ago
     <td><%= o_item.quantity %></td>
     <td><%= number_to_currency(o_item.price) %></td>
     <td><%= number_to_currency(o_item.subtotal) %></td>
+    <td><%= link_to "Review Item #{o_item.item.name}", new_order_items_review_path(o_item) %> </td>
     <td>
-      <% if o_item.item.user == current_user && 
-            current_user.merchant? && 
+      <% if o_item.item.user == current_user &&
+            current_user.merchant? &&
             o_item.fulfilled == false &&
             o_item.quantity <= o_item.item.inventory
       %>
       <%= button_to 'fulfill item', order_item_fulfill_path(@order, o_item), method: :patch %>
-      <% elsif o_item.item.user == current_user && 
-            current_user.merchant? && 
+      <% elsif o_item.item.user == current_user &&
+            current_user.merchant? &&
             o_item.fulfilled == false &&
             o_item.quantity > o_item.item.inventory
       %>
       <span class="red">cannot fulfill, not enough inventory</span>
-      <% elsif o_item.item.user == current_user && 
-            current_user.merchant? && 
+      <% elsif o_item.item.user == current_user &&
+            current_user.merchant? &&
             o_item.fulfilled == true
       %>
       (item fulfilled)

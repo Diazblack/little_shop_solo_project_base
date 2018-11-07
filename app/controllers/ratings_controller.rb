@@ -20,12 +20,24 @@ class RatingsController < ApplicationController
   end
 
   def update
-    order = Order.find(params[:order_id])
+    order = Order.find(params[:order_id]) if params[:order_id]
+    item = Item.find(params[:item_id]) if params[:item_id]
     rating = Rating.find(params[:rate_id])
-    if params[:attribute] == 'active'
-      rating.update(active: false)
-      flash[:notice] = "Review Disable"
-      redirect_to order_path(order)
+    if current_admin?
+      if params[:attribute] == 'active'
+        rating.update(active: false)
+        flash[:notice] = "Review Disable"
+      else
+        rating.update(active: true)
+        flash[:notice] = "Review Enable"
+      end
+      redirect_to item_path(item)
+    else
+      if params[:attribute] == 'active'
+        rating.update(active: false)
+        flash[:notice] = "Review Disable"
+        redirect_to order_path(order)
+      end
     end
   end
   private

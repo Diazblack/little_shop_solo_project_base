@@ -36,7 +36,7 @@ describe 'Admin goes to item show and sees reviews' do
     @rate_6 = create(:rating, user: @user_3, order_item: @order_item_8)
   end
 
-  it 'Goes to item show and see reviews' do
+  it 'Goes to item show and see reviews and can find a disable button for review' do
     visit item_path(@item_1)
 
     expect(page).to have_content(@rate_5.title)
@@ -48,5 +48,13 @@ describe 'Admin goes to item show and sees reviews' do
     expect(page).to_not have_content(@rate_3.title)
     expect(page).to_not have_content(@rate_4.title)
     expect(page).to_not have_content(@rate_6.title)
+
+    click_on "Disable Review #{@rate_5.id}"
+
+    expect(current_path).to eq(item_path(@item_1))
+
+    click_on "Enable Review #{@rate_5.id}"
+
+    expect(current_path).to eq(item_path(@item_1))
   end
 end

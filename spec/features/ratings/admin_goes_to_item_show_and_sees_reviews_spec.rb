@@ -43,5 +43,10 @@ describe 'Admin goes to item show and sees reviews' do
     expect(page).to have_content(@rate_1.title)
     expect(page).to have_content(@rate_1.description)
     expect(page).to have_content(@rate_5.description)
+
+    expect(page).to_not have_content(@rate_2.title)
+    expect(page).to_not have_content(@rate_3.title)
+    expect(page).to_not have_content(@rate_4.title)
+    expect(page).to_not have_content(@rate_6.title)
   end
 end

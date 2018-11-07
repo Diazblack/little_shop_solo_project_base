@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     resources :ratings, only: [:new, :create]
   end
 
+  resources :ratings , only: [:update]
+
   resources :items, only: [:index, :show]
   resources :users, only: [:index, :new, :create, :edit, :show, :update] do
     resources :orders, only: [:index, :update]

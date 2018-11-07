@@ -86,7 +86,7 @@ describe 'items review' do
 
       click_on "Create Rating"
 
-      expect(page).to have_content("Incomplete Fields")
+      expect(page).to have_content("Your Review Have Incomplete Fields")
 
     end
   end

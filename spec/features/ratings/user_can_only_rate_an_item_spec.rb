@@ -34,4 +34,17 @@ describe 'Can rate 1 item per order' do
 
      expect(page).to_not have_link("Review Item #{@item_2.name}")
    end
+
+   it 'if user has a review sees a button to deactivated te rating' do
+
+     visit profile_orders_path(@user)
+
+     click_on "Order #{@order_2.id}"
+
+     click_on "Disable Review"
+
+     expect(page).to_not have_content(@review.title)
+     expect(page).to_not have_content(@review.description)
+     expect(page).to_not have_content(@review.rate)
+   end
 end

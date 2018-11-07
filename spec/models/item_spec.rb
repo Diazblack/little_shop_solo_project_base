@@ -33,19 +33,4 @@ RSpec.describe Item, type: :model do
       expect(Item.popular_items(3)).to eq([item_3, item_4, item_2])
     end
   end
-
-  describe 'Instance Methods' do
-    it 'Item_ratings' do
-      @user_1 = create(:user, role: 0)
-      @merchant = create(:merchant)
-      @item_1, @item_2, @item_3, @item_4, @item_5 = create_list(:item, 5, user: @merchant)
-      @order_1 = create(:completed_order, user: @user_1)
-      @order_item_1 = create(:order_item, order: @order_1, item: @item_1)
-      @order_item_2 = create(:order_item, order: @order_1, item: @item_2)
-      @rate_1 = create(:rating, user: @user_1, order_item: @order_item_1)
-      @rate_2 = create(:rating, user: @user_1, order_item: @order_item_2)
-
-      expect(@item_1.item_ratings).to eq([@rate_1])
-    end
-  end
 end

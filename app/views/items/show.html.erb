@@ -31,7 +31,13 @@
 <%= button_to 'Add to Cart', cart_item_quantity_path(item_id: @item.id), method: :patch, params: {quantity: :more} %>
 
 <% if current_admin? || current_user == @item.user %>
-<%= link_to 'Edit', edit_merchant_item_path(@item.user, @item) %> |
+  <%= link_to 'Edit', edit_merchant_item_path(@item.user, @item) %> |
 <% end %>
-
+<div class="ratings">
+  <% @o_items.each do |o_item| %>
+    <%= o_item.ratings.last.title %>
+    <%= o_item.ratings.last.description %>
+    <%= o_item.ratings.last.rate %>
+  <% end %>
+</div>
 <%= link_to 'Back', items_path %>

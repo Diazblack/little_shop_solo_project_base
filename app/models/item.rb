@@ -24,6 +24,6 @@ class Item < ApplicationRecord
   end
 
   def item_ratings
-    require "pry"; binding.pry
+
   end
 end

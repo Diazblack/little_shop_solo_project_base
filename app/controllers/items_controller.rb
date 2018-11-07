@@ -16,6 +16,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @o_items = @item.order_items
   end
 
   def edit

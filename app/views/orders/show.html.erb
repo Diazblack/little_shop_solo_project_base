@@ -43,18 +43,20 @@ Updated <%= distance_of_time_in_words(@order.created_at, Time.now) %> ago
         <% if o_item.ratings.count == 0 %>
           <%= link_to "Review Item #{o_item.item.name}", new_order_item_rating_path(o_item) %>
         <% elsif review.active %>
-          <li>Review</li>
-          <li><%= review.title %></li>
-          <li><%= review.description %></li>
-          <li>Rate:<%= review.rate %></li>
-          <li><%= button_to "Disable Review", {controller: 'ratings',
-                                              action: 'update',
-                                              attribute: 'active',
-                                              rate_id: review.id,
-                                              order_id: @order.id},
-                                              method: :patch,
-                                              data: { confirm: "Are you sure?"} %>
-          </li>
+          <ul>
+            <li>Review</li>
+            <li><%= review.title %></li>
+            <li><%= review.description %></li>
+            <li>Rate: <%= review.rate %> Stars</li>
+            <li><%= button_to "Disable Review", {controller: 'ratings',
+                                                action: 'update',
+                                                attribute: 'active',
+                                                rate_id: review.id,
+                                                order_id: @order.id},
+                                                method: :patch,
+                                                data: { confirm: "Are you sure?"} %>
+            </li>
+          </ul>
         <% end %>
       <% end %>
     </td>

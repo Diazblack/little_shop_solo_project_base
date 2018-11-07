@@ -33,7 +33,4 @@ RSpec.describe Item, type: :model do
       expect(Item.popular_items(3)).to eq([item_3, item_4, item_2])
     end
   end
-
-  describe 'Instance Methods' do
-  end
 end

@@ -5,11 +5,11 @@ class Item < ApplicationRecord
 
   validates_presence_of :name, :description
   validates :price, presence: true, numericality: {
-    only_integer: false, 
+    only_integer: false,
     greater_than_or_equal_to: 0
   }
   validates :inventory, presence: true, numericality: {
-    only_integer: true, 
+    only_integer: true,
     greater_than_or_equal_to: 0
   }
 
@@ -21,5 +21,9 @@ class Item < ApplicationRecord
       .group('items.id, order_items.id')
       .order('total_ordered desc')
       .limit(quantity)
+  end
+
+  def item_ratings
+
   end
 end

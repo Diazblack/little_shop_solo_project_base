@@ -31,6 +31,40 @@
 <%= button_to 'Add to Cart', cart_item_quantity_path(item_id: @item.id), method: :patch, params: {quantity: :more} %>
 
 <% if current_admin? || current_user == @item.user %>
-<%= link_to 'Edit', edit_merchant_item(@item.user, @item) %> |
+  <%= link_to 'Edit', edit_merchant_item_path(@item.user, @item) %> |
 <% end %>
+<div class="ratings">
+  <% @o_items.each do |o_item| %>
+    <% rating = o_item.ratings.last %>
+    <p>Reviews</p>
+    <% if rating.active || current_admin? %>
+      <ul>
+        <li><%= rating.title %></li>
+        <li><%= rating.description %></li>
+        <li>Rate: <%= rating.rate %> Stars</li>
+        <% if current_admin? %>
+          <% if rating.active %>
+            <li><%= button_to "Disable Review #{rating.id}", {controller: 'ratings',
+                                                              action: 'update',
+                                                              attribute: 'active',
+                                                              rate_id: rating.id,
+                                                              item_id: @item.id},
+                                                              method: :patch,
+                                                              data: { confirm: "Are you sure?"} %>
+            </li>
+          <% else %>
+            <li><%= button_to "Enable Review #{rating.id}", {controller: 'ratings',
+                                                            action: 'update',
+                                                            attribute: 'disable',
+                                                            rate_id: rating.id,
+                                                            item_id: @item.id},
+                                                            method: :patch,
+                                                            data: { confirm: "Are you sure?"} %>
+            </li>
+          <% end %>
+        <% end  %>
+      </ul>
+    <% end  %>
+  <% end %>
+</div>
 <%= link_to 'Back', items_path %>

@@ -43,8 +43,11 @@ describe 'Can rate 1 item per order' do
 
      click_on "Disable Review"
 
-     expect(page).to_not have_content(@review.title)
-     expect(page).to_not have_content(@review.description)
-     expect(page).to_not have_content(@review.rate)
+     expect(current_path).to eq(order_path(@order_2))
+
+     expect(page).to have_content("Review Disable")
+
+     expect(page).to_not have_content(@rate.title)
+     expect(page).to_not have_content(@rate.description)
    end
 end

@@ -47,7 +47,14 @@ Updated <%= distance_of_time_in_words(@order.created_at, Time.now) %> ago
           <li><%= review.title %></li>
           <li><%= review.description %></li>
           <li>Rate:<%= review.rate %></li>
-          <li><%= button_to "Disable Review", rating_path(review), method: 'patch', data: { confirm: "Are you sure?"} %> </li>
+          <li><%= button_to "Disable Review", {controller: 'ratings',
+                                              action: 'update',
+                                              attribute: 'active',
+                                              rate_id: review.id,
+                                              order_id: @order.id},
+                                              method: :patch,
+                                              data: { confirm: "Are you sure?"} %>
+          </li>
         <% end %>
       <% end %>
     </td>

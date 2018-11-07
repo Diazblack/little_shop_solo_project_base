@@ -20,7 +20,13 @@ class RatingsController < ApplicationController
   end
 
   def update
-    require "pry"; binding.pry
+    order = Order.find(params[:order_id])
+    rating = Rating.find(params[:rate_id])
+    if params[:attribute] == 'active'
+      rating.update(active: false)
+      flash[:notice] = "Review Disable"
+      redirect_to order_path(order)
+    end
   end
   private
 
